@@ -31,7 +31,7 @@ const Confidentiality = function Confidentiality(nextProtocol) {
 
     nextProtocol.connect({
       onConnect: ({ publish, subscribe }) => {
-        const onPrivateMessage = (onEvent) => subscribe({
+        const onPeerEvent = (onEvent) => subscribe({
           private: { key: { id: publicKey.kid } },
           type: 'private'
         }, async (event) => {
@@ -43,14 +43,14 @@ const Confidentiality = function Confidentiality(nextProtocol) {
           });
         });
 
-        const sendPrivateMessage = async (publicKey, event) => {
+        const sendPeerEvent = async (publicKey, event) => {
           publish('private', {
             key: { id: publicKey.kid },
             payload: await encrypt(await dh({ privateKey, publicKey }), event)
           });
         };
 
-        const onGroupMessage = (symmetricKey, onEvent) => subscribe({
+        const onGroupEvent = (symmetricKey, onEvent) => subscribe({
           private: { key: { id: symmetricKey.kid } },
           type: 'private'
         }, async (event) => {
@@ -62,7 +62,7 @@ const Confidentiality = function Confidentiality(nextProtocol) {
           });
         });
 
-        const sendGroupMessage = async (symmetricKey, event) => {
+        const sendGroupEvent = async (symmetricKey, event) => {
           publish('private', {
             key: { id: symmetricKey.kid },
             payload: await encrypt(await importSymmetricKey(symmetricKey), event)
@@ -73,10 +73,10 @@ const Confidentiality = function Confidentiality(nextProtocol) {
 
         onConnect({
           broadcast,
-          onGroupMessage,
-          onPrivateMessage,
-          sendGroupMessage,
-          sendPrivateMessage
+          onGroupEvent,
+          onPeerEvent,
+          sendGroupEvent,
+          sendPeerEvent
         });
       },
       onDisconnect,

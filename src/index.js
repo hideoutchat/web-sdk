@@ -1,7 +1,8 @@
-import '@babel/polyfill';
+import 'regenerator-runtime/runtime';
 
 import Authentication from './authentication';
 import Confidentiality from './confidentiality';
+import Continuity from './continuity';
 import Networking from './networking';
 import Routing from './routing';
 
@@ -10,7 +11,8 @@ export const hideout = (...args) => {
     Networking,
     Routing,
     Authentication,
-    Confidentiality
+    Confidentiality,
+    Continuity
   ];
 
   return protocolStack.reduce((nextProtocol, Protocol) => new Protocol(nextProtocol), new (protocolStack.shift())(...args));

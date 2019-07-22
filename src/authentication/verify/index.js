@@ -20,6 +20,7 @@ export default ({ keyStore }) => async (event) => {
     signature: base64ToBuffer(event.signature)
   });
 
+  // eslint-disable-next-line require-atomic-updates
   event.signingKey = signingKey;
 
   return signingKey;

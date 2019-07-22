@@ -1,6 +1,6 @@
 {
-  "name": "@hideout/web-sdk",
-  "version": "1.0.0",
+  "name": "@hideoutchat/web-sdk",
+  "version": "0.1.0",
   "main": "index.js",
   "author": {
     "email": "devin@canterberry.cc",
@@ -14,21 +14,22 @@
     "test": "nyc --silent --check-coverage --lines 100 --per-file mocha --require @babel/register src/spec.setup.js src/**/spec.js"
   },
   "dependencies": {
-    "@babel/polyfill": "7.4.4",
     "buffer": "5.2.1",
-    "ws": "7.0.0"
+    "regenerator-runtime": "0.13.3",
+    "sha3": "2.0.6",
+    "ws": "7.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.4.4",
-    "@babel/core": "7.4.4",
-    "@babel/preset-env": "7.4.4",
-    "@babel/register": "7.4.4",
-    "babel-eslint": "10.0.1",
+    "@babel/cli": "7.5.5",
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "@babel/register": "7.5.5",
+    "babel-eslint": "10.0.2",
     "chai": "4.2.0",
-    "eslint": "5.16.0",
-    "eslint-plugin-ante": "1.0.2",
-    "jsdoc": "3.6.2",
-    "mocha": "6.1.4",
+    "eslint": "6.1.0",
+    "eslint-plugin-ante": "1.0.3",
+    "jsdoc": "3.6.3",
+    "mocha": "6.2.0",
     "nyc": "14.1.1",
     "sinon": "7.3.2",
     "sinon-chai": "3.3.0"
