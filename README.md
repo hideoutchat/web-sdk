@@ -5,5 +5,5 @@ Hideout network from within a modern web browser.
 
 ## Installing
 
-Using Yarn: `yarn add @hideout/web-sdk`.
-Using NPM: `npm install @hideout/web-sdk`.
+Using Yarn: `yarn add @hideoutchat/web-sdk`.
+Using NPM: `npm install @hideoutchat/web-sdk`.
