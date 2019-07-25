@@ -62,6 +62,8 @@ const Confidentiality = function Confidentiality(nextProtocol) {
           });
         });
 
+        const onBroadcast = (type, onEvent) => subscribe({ type }, onEvent);
+
         const sendGroupEvent = async (symmetricKey, event) => {
           publish('private', {
             key: { id: symmetricKey.kid },
@@ -73,6 +75,7 @@ const Confidentiality = function Confidentiality(nextProtocol) {
 
         onConnect({
           broadcast,
+          onBroadcast,
           onGroupEvent,
           onPeerEvent,
           sendGroupEvent,

@@ -4,6 +4,7 @@ const Continuity = function Continuity(nextProtocol) {
       onConnect: (nextProtocol) => {
         onConnect({
           broadcast: (type, event) => nextProtocol.broadcast(type, event),
+          onBroadcast: (type, onEvent) => nextProtocol.onBroadcast(type, onEvent),
           onGroupEvent: (symmetricKey, onEvent) => nextProtocol.onGroupEvent(symmetricKey, onEvent),
           onPeerEvent: (onEvent) => nextProtocol.onPeerEvent(onEvent),
           sendGroupEvent: (symmetricKey, event) => nextProtocol.sendGroupEvent(symmetricKey, event),
