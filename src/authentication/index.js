@@ -35,10 +35,11 @@ const Authentication = function Authentication(nextProtocol) {
             },
             type: 'challengeResponse'
           // eslint-disable-next-line max-statements
-          }, async (event) => {
+          }, async (envelope) => {
+            const { [envelope.type]: event } = envelope;
             clearTimeout(timeout);
 
-            const { challengeResponse: { signingKey } } = event;
+            const { signingKey } = event;
 
             try {
               await verifyPublicKey(signingKey);
@@ -63,7 +64,8 @@ const Authentication = function Authentication(nextProtocol) {
           signAndPublish('challenge', challenge);
         });
 
-        const withVerification = (onEvent) => async (event) => {
+        const withVerification = (onEvent) => async (envelope) => {
+          const { [envelope.type]: event } = envelope;
           try {
             await verify(event);
           } catch (error) {
