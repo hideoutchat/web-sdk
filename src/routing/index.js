@@ -11,7 +11,7 @@ const Routing = function Routing(nextProtocol) {
         nextProtocol.onReceive('publish', (event) => {
           for (const { isMatchingEvent, subscribers } of state.subscriptions) {
             if (isMatchingEvent(event)) {
-              for (const onEvent of subscribers) {
+              for (const { onEvent } of subscribers) {
                 onEvent(event);
               }
             }
