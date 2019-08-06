@@ -35,40 +35,40 @@ const Confidentiality = function Confidentiality(nextProtocol) {
           private: { key: { id: publicKey.kid } },
           type: 'private'
         }, async (event) => {
-          const { private: { payload: { ciphertext, iv } }, signingKey } = event;
-
-          onEvent({
-            ...event,
-            private: await decrypt(await dh({ privateKey, publicKey: signingKey }), { ciphertext, iv })
-          });
+          const { payload: { ciphertext, iv }, signingKey } = event;
+          const payload = await decrypt(await dh({ privateKey, publicKey: signingKey }), { ciphertext, iv });
+          onEvent(Object.keys(event).reduce((a, key) => {
+            if (key !== 'payload') {
+              a[key] = event[key];
+            }
+            return a;
+          }, payload));
         });
 
         const sendPeerEvent = async (publicKey, event) => {
-          publish('private', {
-            key: { id: publicKey.kid },
-            payload: await encrypt(await dh({ privateKey, publicKey }), event)
-          });
+          const payload = await encrypt(await dh({ privateKey, publicKey }), event);
+          publish('private', { key: { id: publicKey.kid }, payload });
         };
 
         const onGroupEvent = (symmetricKey, onEvent) => subscribe({
           private: { key: { id: symmetricKey.kid } },
           type: 'private'
         }, async (event) => {
-          const { private: { payload: { ciphertext, iv } } } = event;
-
-          onEvent({
-            ...event,
-            private: await decrypt(await importSymmetricKey(symmetricKey), { ciphertext, iv })
-          });
+          const { payload: { ciphertext, iv } } = event;
+          const payload = await decrypt(await importSymmetricKey(symmetricKey), { ciphertext, iv });
+          onEvent(Object.keys(event).reduce((a, key) => {
+            if (key !== 'payload') {
+              a[key] = event[key];
+            }
+            return a;
+          }, payload));
         });
 
         const onBroadcast = (type, onEvent) => subscribe({ type }, onEvent);
 
         const sendGroupEvent = async (symmetricKey, event) => {
-          publish('private', {
-            key: { id: symmetricKey.kid },
-            payload: await encrypt(await importSymmetricKey(symmetricKey), event)
-          });
+          const payload = await encrypt(await importSymmetricKey(symmetricKey), event);
+          publish('private', { key: { id: symmetricKey.kid }, payload });
         };
 
         const broadcast = publish;
