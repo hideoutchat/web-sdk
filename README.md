@@ -67,4 +67,4 @@ hideout(WebSocket).connect({
 [7]: https://github.com/hideoutchat/web-sdk/blob/master/package.json
 [8]: https://img.shields.io/david/dev/hideoutchat/web-sdk.svg
 [9]: https://img.shields.io/github/license/hideoutchat/web-sdk.svg
-[10]: https://github.com/hideoutchat/web-sdk/blob/master/LICENSE
+[10]: https://github.com/hideoutchat/web-sdk/blob/master/LICENSE.md
