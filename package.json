@@ -14,16 +14,16 @@
     "test": "nyc --silent --check-coverage --lines 100 --per-file mocha --require @babel/register src/spec.setup.js src/**/spec.js"
   },
   "dependencies": {
-    "buffer": "5.4.2",
+    "buffer": "5.4.3",
     "regenerator-runtime": "0.13.3",
     "sha3": "2.0.7",
     "ws": "7.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.5.5",
-    "@babel/core": "7.5.5",
-    "@babel/preset-env": "7.5.5",
-    "@babel/register": "7.5.5",
+    "@babel/cli": "7.6.0",
+    "@babel/core": "7.6.0",
+    "@babel/preset-env": "7.6.0",
+    "@babel/register": "7.6.0",
     "babel-eslint": "10.0.3",
     "chai": "4.2.0",
     "eslint": "6.3.0",
